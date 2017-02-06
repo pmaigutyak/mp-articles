@@ -34,6 +34,11 @@ ARTICLE_TYPE_CHOICES = (
 DEFAULT_ARTICLE_TYPE = 'example'
 ```
 
+Run migrations:
+```
+$ python manage.py migrate
+```
+
 ### Template tags
 
 To get latest articles in template you should load 'articles' tags and add 'get_latest_articles' template tag into your template. 
