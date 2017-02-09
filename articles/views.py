@@ -3,12 +3,13 @@ from django.shortcuts import render, get_object_or_404
 
 from pagination import paginate
 
+from articles.settings import ARTICLE_TYPE_CHOICES
 from articles.models import Article
 
 
 def article_list(request, article_type):
 
-    printable_article_type = dict(Article.ARTICLE_TYPE_CHOICES)[article_type]
+    printable_article_type = dict(ARTICLE_TYPE_CHOICES)[article_type]
 
     articles = Article.objects.filter(type=article_type)
 
