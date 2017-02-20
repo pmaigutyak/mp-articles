@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse_lazy
 
-from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 from articles.settings import DEFAULT_ARTICLE_TYPE, ARTICLE_TYPE_CHOICES
 
@@ -21,7 +21,7 @@ class Article(models.Model):
 
     description = models.CharField(_('Description'), max_length=255)
 
-    text = RichTextField(_('Text'), max_length=10000)
+    text = RichTextUploadingField(_('Text'), max_length=10000)
 
     def __unicode__(self):
         return self.title

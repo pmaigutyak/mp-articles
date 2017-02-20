@@ -1,7 +1,7 @@
 
 from django.shortcuts import render, get_object_or_404
 
-from pagination import paginate
+from pure_pagination import Paginator
 
 from articles.settings import ARTICLE_TYPE_CHOICES
 from articles.models import Article
@@ -11,11 +11,11 @@ def article_list(request, article_type):
 
     printable_article_type = dict(ARTICLE_TYPE_CHOICES)[article_type]
 
-    articles = Article.objects.filter(type=article_type)
+    paginator = Paginator(Article.objects.filter(type=article_type), 10)
 
     context = {
         'printable_article_type': printable_article_type,
-        'articles': paginate(request, articles, items_per_page=10)
+        'articles': paginator.page(request.GET.get('page', 1))
     }
 
     return render(request, 'articles/list.html', context)
