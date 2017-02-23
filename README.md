@@ -7,7 +7,7 @@ Django articles app.
 Install with pip:
 
 ```sh
-$ pip install -e git://github.com/pmaigutyak/mp-articles.git#egg=mp-articles
+$ pip install django-mp-articles
 ```
 
 Add articles to urls.py:
@@ -59,5 +59,5 @@ Examples:
 App require this packages:
 
 * django-modeltranslation
-* -e git://github.com/pmaigutyak/mp-pagination.git#egg=mp-pagination
+* django-pure-pagination
 * django-ckeditor
