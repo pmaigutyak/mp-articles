@@ -1,23 +1,26 @@
+from setuptools import setup, find_packages
 
-try:
-    from setuptools import setup
-except ImportError:
-    from distutils.core import setup
+from articles import __version__
+
+
+with open('requirements.txt') as f:
+    requires = f.read().splitlines()
+
+
+url = 'https://github.com/pmaigutyak/mp-articles'
 
 
 setup(
     name='django-mp-articles',
-    version='1.0.0',
-    description='',
+    version=__version__,
+    description='Django articles apps',
     long_description=open('README.md').read(),
     author='Paul Maigutyak',
     author_email='pmaigutyak@gmail.com',
-    url='https://github.com/pmaigutyak/mp-articles',
-    download_url='https://github.com/pmaigutyak/mp-articles/archive/1.0.tar.gz',
-    packages=['articles'],
+    url=url,
+    download_url='%s/archive/%s.tar.gz' % (url, __version__),
+    packages=find_packages(),
+    include_package_data=True,
     license='MIT',
-    install_requires=[
-        'django-ckeditor==5.2.1',
-        'django-pure-pagination==0.3.0'
-    ]
+    install_requires=requires
 )
