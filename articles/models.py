@@ -35,3 +35,4 @@ class Article(models.Model):
     class Meta:
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
+        ordering = ['-id']
