@@ -10,4 +10,4 @@ class ArticlesConfig(AppConfig):
 
 default_app_config = 'articles.ArticlesConfig'
 
-__version__ = '2.1'
+__version__ = '2.2'

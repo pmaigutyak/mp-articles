@@ -23,6 +23,11 @@ class Article(models.Model):
 
     text = RichTextUploadingField(_('Text'), max_length=10000)
 
+    created = models.DateTimeField(_('Created'), auto_now=True, db_index=True)
+
+    is_comments_enabled = models.BooleanField(
+        _('Is comments enabled'), default=True)
+
     def __unicode__(self):
         return self.title
 
