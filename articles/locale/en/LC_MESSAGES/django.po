@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-03 15:16+0000\n"
+"POT-Creation-Date: 2017-10-05 06:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: articles/__init__.py:8 articles/models.py:42
+#: articles/__init__.py:8 articles/models.py:44
 msgid "Articles"
 msgstr ""
 
@@ -41,11 +41,15 @@ msgstr ""
 msgid "Created"
 msgstr ""
 
-#: articles/models.py:29
+#: articles/models.py:28
+msgid "Author"
+msgstr ""
+
+#: articles/models.py:31
 msgid "Is comments enabled"
 msgstr ""
 
-#: articles/models.py:41
+#: articles/models.py:43
 msgid "Article"
 msgstr ""
 

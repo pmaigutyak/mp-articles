@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-03 15:16+0000\n"
+"POT-Creation-Date: 2017-10-05 06:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: articles/__init__.py:8 articles/models.py:42
+#: articles/__init__.py:8 articles/models.py:44
 msgid "Articles"
 msgstr "Статті"
 
@@ -43,11 +43,15 @@ msgstr "Текст"
 msgid "Created"
 msgstr "Створено"
 
-#: articles/models.py:29
+#: articles/models.py:28
+msgid "Author"
+msgstr "Автор"
+
+#: articles/models.py:31
 msgid "Is comments enabled"
 msgstr "Чи можна коментувати"
 
-#: articles/models.py:41
+#: articles/models.py:43
 msgid "Article"
 msgstr "Стаття"
 

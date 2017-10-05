@@ -23,7 +23,9 @@ class Article(models.Model):
 
     text = RichTextUploadingField(_('Text'), max_length=10000)
 
-    created = models.DateTimeField(_('Created'), auto_now=True, db_index=True)
+    created = models.DateTimeField(_('Created'), db_index=True)
+
+    author = models.CharField(_('Author'), max_length=255, blank=True)
 
     is_comments_enabled = models.BooleanField(
         _('Is comments enabled'), default=True)
@@ -34,10 +36,10 @@ class Article(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('articles:info', kwargs={
             'article_type': self.type,
-            'article_id': self.id
+            'article_id': self.pk
         })
 
     class Meta:
         verbose_name = _('Article')
         verbose_name_plural = _('Articles')
-        ordering = ['-id']
+        ordering = ['-created']
