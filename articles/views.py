@@ -1,30 +1,37 @@
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import get_object_or_404
+from django.views.generic import ListView
 
-from pure_pagination import Paginator
+from pure_pagination import PaginationMixin
+from hitcount.views import HitCountDetailView
 
 from articles.settings import ARTICLE_TYPE_CHOICES
 from articles.models import Article
 
 
-def article_list(request, article_type):
+class ArticleListView(PaginationMixin, ListView):
 
-    printable_article_type = dict(ARTICLE_TYPE_CHOICES)[article_type]
+    template_name = 'articles/list.html'
+    paginate_by = 10
 
-    paginator = Paginator(Article.objects.filter(type=article_type), 10)
+    def get_queryset(self):
+        return Article.objects.filter(type=self.kwargs['type'])
 
-    context = {
-        'printable_article_type': printable_article_type,
-        'articles': paginator.page(request.GET.get('page', 1))
-    }
+    def get_context_data(self, **kwargs):
+        cxt = super(ArticleListView, self).get_context_data(**kwargs)
+        cxt['printable_article_type'] = (
+            dict(ARTICLE_TYPE_CHOICES)[self.kwargs['type']])
+        return cxt
 
-    return render(request, 'articles/list.html', context)
 
+class ArticleDetailView(HitCountDetailView):
 
-def article_info(request, article_type, article_id):
+    template_name = 'articles/info.html'
+    count_hit = True
 
-    context = {
-        'article': get_object_or_404(Article, type=article_type, id=article_id)
-    }
-
-    return render(request, 'articles/info.html', context)
+    def get_object(self, queryset=None):
+        query = {
+            'type': self.kwargs['type'],
+            'pk': self.kwargs['id']
+        }
+        return get_object_or_404(Article, **query)

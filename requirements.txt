@@ -1,2 +1,4 @@
 django-ckeditor
 django-pure-pagination
+django-hitcount
+awesome-slugify
