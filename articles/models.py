@@ -21,7 +21,7 @@ class Article(models.Model):
 
     description = models.CharField(_('Description'), max_length=255)
 
-    text = RichTextUploadingField(_('Text'), max_length=10000)
+    text = RichTextUploadingField(_('Text'), max_length=50000)
 
     created = models.DateTimeField(_('Created'), db_index=True)
 
