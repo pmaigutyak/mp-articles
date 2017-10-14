@@ -14,6 +14,18 @@ from hitcount.models import HitCount
 from articles.settings import DEFAULT_ARTICLE_TYPE, ARTICLE_TYPE_CHOICES
 
 
+class ArticleTag(models.Model):
+
+    text = models.CharField(_('Text'), max_length=255, unique=True)
+
+    def __unicode__(self):
+        return self.text
+
+    class Meta:
+        verbose_name = _('Article tag')
+        verbose_name_plural = _('Article tags')
+
+
 class Article(models.Model):
 
     type = models.CharField(
@@ -35,6 +47,9 @@ class Article(models.Model):
 
     is_comments_enabled = models.BooleanField(
         _('Is comments enabled'), default=True)
+
+    tags = models.ManyToManyField(
+        ArticleTag, verbose_name=_("Tags"), related_name='tags', blank=True)
 
     @classmethod
     def most_popular(cls, article_type):

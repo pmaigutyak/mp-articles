@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-05 06:37+0000\n"
+"POT-Creation-Date: 2017-10-14 10:14+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,42 +19,54 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: articles/__init__.py:8 articles/models.py:44
+#: __init__.py:8 models.py:107
 msgid "Articles"
 msgstr "Статті"
 
-#: articles/models.py:14
-msgid "Type"
-msgstr "Тип"
-
-#: articles/models.py:17
-msgid "Title"
-msgstr "назва"
-
-#: articles/models.py:22
-msgid "Description"
-msgstr "Опис"
-
-#: articles/models.py:24
+#: models.py:19 models.py:42
 msgid "Text"
 msgstr "Текст"
 
-#: articles/models.py:26
+#: models.py:25
+msgid "Article tag"
+msgstr "Тег статті"
+
+#: models.py:26
+msgid "Article tags"
+msgstr "Теги статтей"
+
+#: models.py:32
+msgid "Type"
+msgstr "Тип"
+
+#: models.py:35
+msgid "Title"
+msgstr "назва"
+
+#: models.py:40
+msgid "Description"
+msgstr "Опис"
+
+#: models.py:44
 msgid "Created"
 msgstr "Створено"
 
-#: articles/models.py:28
+#: models.py:46
 msgid "Author"
 msgstr "Автор"
 
-#: articles/models.py:31
+#: models.py:49
 msgid "Is comments enabled"
 msgstr "Чи можна коментувати"
 
-#: articles/models.py:43
+#: models.py:52
+msgid "Tags"
+msgstr "Теги"
+
+#: models.py:106
 msgid "Article"
 msgstr "Стаття"
 
-#: articles/settings.py:7
+#: settings.py:7
 msgid "News"
 msgstr "Новини"
