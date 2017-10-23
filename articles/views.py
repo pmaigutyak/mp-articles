@@ -1,12 +1,12 @@
 
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
+from django.contrib.sites.models import Site
 
 from pure_pagination import PaginationMixin
 from hitcount.views import HitCountDetailView
 
-from articles.settings import ARTICLE_TYPE_CHOICES
-from articles.models import Article
+from articles.models import Article, ArticleType
 
 
 class ArticleListView(PaginationMixin, ListView):
@@ -14,13 +14,17 @@ class ArticleListView(PaginationMixin, ListView):
     template_name = 'articles/list.html'
     paginate_by = 10
 
+    def get(self, request, *args, **kwargs):
+        self.article_type = get_object_or_404(ArticleType, slug=kwargs['type'])
+        return super(ArticleListView, self).get(request, *args, **kwargs)
+
     def get_queryset(self):
-        return Article.objects.filter(type=self.kwargs['type'])
+        site = Site.objects.get(domain=self.request.META.get('HTTP_HOST'))
+        return self.article_type.articles.filter(site=site)
 
     def get_context_data(self, **kwargs):
         cxt = super(ArticleListView, self).get_context_data(**kwargs)
-        cxt['printable_article_type'] = (
-            dict(ARTICLE_TYPE_CHOICES)[self.kwargs['type']])
+        cxt['article_type'] = self.article_type
         return cxt
 
 
@@ -30,8 +34,11 @@ class ArticleDetailView(HitCountDetailView):
     count_hit = True
 
     def get_object(self, queryset=None):
+        site = Site.objects.get(domain=self.request.META.get('HTTP_HOST'))
+
         query = {
-            'type': self.kwargs['type'],
+            'site': site,
+            'type__slug': self.kwargs['type'],
             'pk': self.kwargs['id']
         }
         return get_object_or_404(Article, **query)

@@ -6,13 +6,23 @@ from django import template
 register = template.Library()
 
 
-@register.simple_tag
-def get_latest_articles(article_type, count=5):
+@register.simple_tag(takes_context=True)
+def get_latest_articles(context, article_type, count=5):
+
+    site_model = apps.get_model('sites', 'Site')
+
+    site = site_model.objects.get(domain=context.request.META.get('HTTP_HOST'))
+
     return apps.get_model('articles', 'Article').objects.filter(
-        type=article_type)[:count]
+        type__slug=article_type, site=site)[:count]
 
 
-@register.simple_tag
-def get_most_popular_articles(article_type, count=5):
+@register.simple_tag(takes_context=True)
+def get_most_popular_articles(context, article_type, count=5):
+
+    site_model = apps.get_model('sites', 'Site')
+
+    site = site_model.objects.get(domain=context.request.META.get('HTTP_HOST'))
+
     return apps.get_model('articles', 'Article').most_popular(
-        article_type)[:count]
+        site.id, article_type)[:count]

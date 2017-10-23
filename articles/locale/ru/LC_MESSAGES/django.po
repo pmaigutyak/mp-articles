@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-14 10:14+0300\n"
+"POT-Creation-Date: 2017-10-23 15:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,54 +20,70 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: __init__.py:8 models.py:107
+#: articles/__init__.py:8 articles/models.py:135
 msgid "Articles"
 msgstr "Статьи"
 
-#: models.py:19 models.py:42
+#: articles/models.py:19
+msgid "Name"
+msgstr "Название"
+
+#: articles/models.py:22
+msgid "Slug"
+msgstr ""
+
+#: articles/models.py:28
+msgid "Article type"
+msgstr "Тип статьи"
+
+#: articles/models.py:29
+msgid "Article types"
+msgstr "Типы статей"
+
+#: articles/models.py:34 articles/models.py:60
 msgid "Text"
 msgstr "Текст"
 
-#: models.py:25
+#: articles/models.py:40
 msgid "Article tag"
 msgstr "Тег статьи"
 
-#: models.py:26
+#: articles/models.py:41
 msgid "Article tags"
 msgstr "Теги статей"
 
-#: models.py:32
+#: articles/models.py:47
+msgid "Site"
+msgstr "Сайт"
+
+#: articles/models.py:50
 msgid "Type"
 msgstr "Тип"
 
-#: models.py:35
+#: articles/models.py:53
 msgid "Title"
 msgstr "Название"
 
-#: models.py:40
+#: articles/models.py:58
 msgid "Description"
 msgstr "Описание"
 
-#: models.py:44
+#: articles/models.py:62
 msgid "Created"
 msgstr "Создано"
 
-#: models.py:46
+#: articles/models.py:64
 msgid "Author"
 msgstr "Автор"
 
-#: models.py:49
+#: articles/models.py:67
 msgid "Is comments enabled"
 msgstr "Можно комментировать"
 
-#: models.py:52
+#: articles/models.py:70
 msgid "Tags"
 msgstr "Теги"
 
-#: models.py:106
+#: articles/models.py:134
 msgid "Article"
 msgstr "Статья"
-
-#: settings.py:7
-msgid "News"
-msgstr "Новости"

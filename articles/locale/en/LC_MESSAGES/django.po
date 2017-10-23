@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-14 10:14+0300\n"
+"POT-Creation-Date: 2017-10-23 16:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,54 +17,70 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: __init__.py:8 models.py:107
+#: articles/__init__.py:8 articles/models.py:135
 msgid "Articles"
 msgstr ""
 
-#: models.py:19 models.py:42
+#: articles/models.py:19
+msgid "Name"
+msgstr ""
+
+#: articles/models.py:22
+msgid "Slug"
+msgstr ""
+
+#: articles/models.py:28
+msgid "Article type"
+msgstr ""
+
+#: articles/models.py:29
+msgid "Article types"
+msgstr ""
+
+#: articles/models.py:34 articles/models.py:60
 msgid "Text"
 msgstr ""
 
-#: models.py:25
+#: articles/models.py:40
 msgid "Article tag"
 msgstr ""
 
-#: models.py:26
+#: articles/models.py:41
 msgid "Article tags"
 msgstr ""
 
-#: models.py:32
+#: articles/models.py:47
+msgid "Site"
+msgstr ""
+
+#: articles/models.py:50
 msgid "Type"
 msgstr ""
 
-#: models.py:35
+#: articles/models.py:53
 msgid "Title"
 msgstr ""
 
-#: models.py:40
+#: articles/models.py:58
 msgid "Description"
 msgstr ""
 
-#: models.py:44
+#: articles/models.py:62
 msgid "Created"
 msgstr ""
 
-#: models.py:46
+#: articles/models.py:64
 msgid "Author"
 msgstr ""
 
-#: models.py:49
+#: articles/models.py:67
 msgid "Is comments enabled"
 msgstr ""
 
-#: models.py:52
+#: articles/models.py:70
 msgid "Tags"
 msgstr ""
 
-#: models.py:106
+#: articles/models.py:134
 msgid "Article"
-msgstr ""
-
-#: settings.py:7
-msgid "News"
 msgstr ""
