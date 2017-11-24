@@ -1,7 +1,7 @@
 
+from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
-from django.contrib.sites.models import Site
 
 from pure_pagination import PaginationMixin
 from hitcount.views import HitCountDetailView
@@ -19,8 +19,7 @@ class ArticleListView(PaginationMixin, ListView):
         return super(ArticleListView, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
-        site = Site.objects.get(domain=self.request.META.get('HTTP_HOST'))
-        return self.article_type.articles.filter(site=site)
+        return self.article_type.articles.filter(site_id=settings.SITE_ID)
 
     def get_context_data(self, **kwargs):
         cxt = super(ArticleListView, self).get_context_data(**kwargs)
@@ -34,11 +33,8 @@ class ArticleDetailView(HitCountDetailView):
     count_hit = True
 
     def get_object(self, queryset=None):
-        site = Site.objects.get(domain=self.request.META.get('HTTP_HOST'))
-
-        query = {
-            'site': site,
-            'type__slug': self.kwargs['type'],
-            'pk': self.kwargs['id']
-        }
-        return get_object_or_404(Article, **query)
+        return get_object_or_404(
+            Article,
+            site_id=settings.SITE_ID,
+            type__slug=self.kwargs['type'],
+            pk=self.kwargs['id'])

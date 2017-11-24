@@ -70,12 +70,15 @@ class Article(models.Model):
         ArticleTag, verbose_name=_("Tags"), related_name='tags', blank=True)
 
     @classmethod
-    def most_popular(cls, site_id, article_type):
+    def most_popular(cls, article_type):
+
         ct = ContentType.objects.get_for_model(cls)
+
         ids = HitCount.objects.filter(content_type=ct).order_by('-hits')\
             .values_list('object_pk', flat=True)
+
         return cls.objects.filter(
-            site_id=site_id,
+            site_id=settings.SITE_ID,
             type__slug=article_type,
             id__in=ids
         ).extra(
