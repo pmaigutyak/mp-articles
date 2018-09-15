@@ -1,22 +1,9 @@
 
-from modeltranslation.translator import register, TranslationOptions
+from modeltranslation.translator import translator
 
 from articles.models import Article, ArticleTag, ArticleType
 
 
-@register(Article)
-class ArticleTranslationOptions(TranslationOptions):
-
-    fields = ('title', 'description', 'text', )
-
-
-@register(ArticleTag)
-class ArticleTagTranslationOptions(TranslationOptions):
-
-    fields = ('text', )
-
-
-@register(ArticleType)
-class ArticleTypeTranslationOptions(TranslationOptions):
-
-    fields = ('name', )
+translator.register(Article, fields=['title', 'description', 'text'])
+translator.register(ArticleTag, fields=['text'])
+translator.register(ArticleType, fields=['name'])

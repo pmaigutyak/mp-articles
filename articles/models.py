@@ -1,13 +1,11 @@
 
 from random import randint
 
-from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse_lazy
+from django.urls import reverse_lazy
 from django.contrib.contenttypes.models import ContentType
 from django.utils.functional import cached_property
-from django.contrib.sites.models import Site
 
 from ckeditor_uploader.fields import RichTextUploadingField
 from slugify import slugify_url
@@ -43,12 +41,9 @@ class ArticleTag(models.Model):
 
 class Article(models.Model):
 
-    site = models.ForeignKey(
-        Site, verbose_name=_('Site'), default=settings.SITE_ID)
-
     type = models.ForeignKey(
         ArticleType, verbose_name=_('Type'), blank=True, null=True,
-        related_name='articles')
+        related_name='articles', on_delete=models.SET_NULL)
 
     title = models.CharField(_('Title'), max_length=255)
 
@@ -78,7 +73,6 @@ class Article(models.Model):
             .values_list('object_pk', flat=True)
 
         return cls.objects.filter(
-            site_id=settings.SITE_ID,
             type__slug=article_type,
             id__in=ids
         ).extra(
@@ -90,12 +84,12 @@ class Article(models.Model):
         )
 
     @classmethod
-    def get_related_articles(cls, site_id, article_type, exclude_pk, count=6):
+    def get_related_articles(cls, article_type, exclude_pk, count=6):
 
         index = 0
 
         related_articles = cls.objects.filter(
-            site_id=site_id, type__slug=article_type
+            type__slug=article_type
         ).exclude(
             pk=exclude_pk
         )
@@ -113,7 +107,7 @@ class Article(models.Model):
 
     @cached_property
     def related_articles(self):
-        return self.get_related_articles(self.site_id, self.type.slug, self.pk)
+        return self.get_related_articles(self.type.slug, self.pk)
 
     @property
     def hits(self):

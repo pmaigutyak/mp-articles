@@ -1,5 +1,4 @@
 
-from django.conf import settings
 from django.apps import apps
 from django import template
 
@@ -10,7 +9,7 @@ register = template.Library()
 @register.simple_tag(takes_context=True)
 def get_latest_articles(context, article_type, count=5):
     return apps.get_model('articles', 'Article').objects.filter(
-        type__slug=article_type, site_id=settings.SITE_ID)[:count]
+        type__slug=article_type)[:count]
 
 
 @register.simple_tag(takes_context=True)

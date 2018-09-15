@@ -1,8 +1,6 @@
 
-from django.db import models
 from django.contrib import admin
 
-from easy_select2.widgets import Select2Multiple
 from modeltranslation.admin import TranslationAdmin
 
 from articles.models import Article, ArticleTag, ArticleType
@@ -15,11 +13,7 @@ class ArticleAdmin(TranslationAdmin):
 
     list_filter = ['site', 'type', 'created', 'is_comments_enabled']
 
-    formfield_overrides = {
-        models.ManyToManyField: {
-            'widget': Select2Multiple(select2attrs={'width': '500px'})
-        }
-    }
+    filter_horizontal = ['tags']
 
 
 class ArticleTagAdmin(TranslationAdmin):

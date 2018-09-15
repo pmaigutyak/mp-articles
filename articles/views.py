@@ -1,5 +1,4 @@
 
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
@@ -19,7 +18,7 @@ class ArticleListView(PaginationMixin, ListView):
         return super(ArticleListView, self).get(request, *args, **kwargs)
 
     def get_queryset(self):
-        return self.article_type.articles.filter(site_id=settings.SITE_ID)
+        return self.article_type.articles.all()
 
     def get_context_data(self, **kwargs):
         cxt = super(ArticleListView, self).get_context_data(**kwargs)
@@ -35,6 +34,5 @@ class ArticleDetailView(HitCountDetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(
             Article,
-            site_id=settings.SITE_ID,
             type__slug=self.kwargs['type'],
             pk=self.kwargs['id'])
