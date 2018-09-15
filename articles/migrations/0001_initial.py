@@ -11,10 +11,6 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('sites', '0002_alter_domain_unique'),
-    ]
-
     operations = [
         migrations.CreateModel(
             name='Article',
@@ -27,7 +23,6 @@ class Migration(migrations.Migration):
                 ('created', models.DateTimeField(db_index=True, verbose_name='Created')),
                 ('author', models.CharField(blank=True, max_length=255, verbose_name='Author')),
                 ('is_comments_enabled', models.BooleanField(default=True, verbose_name='Is comments enabled')),
-                ('site', models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, to='sites.Site', verbose_name='Site')),
             ],
             options={
                 'ordering': ['-created'],
