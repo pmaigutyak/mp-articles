@@ -4,6 +4,9 @@ from django.urls import path
 from articles import views
 
 
+app_name = 'articles'
+
+
 urlpatterns = [
 
     path('<str:type>/', views.ArticleListView.as_view(), name='list'),
