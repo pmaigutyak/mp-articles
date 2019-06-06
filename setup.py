@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 
-version = '7.0'
+version = '7.1'
 url = 'https://github.com/pmaigutyak/mp-articles'
 
 
@@ -14,7 +14,6 @@ setup(
     name='django-mp-articles',
     version=version,
     description='Django articles apps',
-    long_description=open('README.md').read(),
     author='Paul Maigutyak',
     author_email='pmaigutyak@gmail.com',
     url=url,

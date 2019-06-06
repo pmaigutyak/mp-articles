@@ -19,7 +19,7 @@ class ArticleType(models.Model):
     slug = models.CharField(
         _('Slug'), max_length=255, db_index=True, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -31,7 +31,7 @@ class ArticleTag(models.Model):
 
     text = models.CharField(_('Text'), max_length=255, unique=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.text
 
     class Meta:
@@ -117,7 +117,7 @@ class Article(models.Model):
     def slug(self):
         return slugify_url(self.title, separator='_')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def get_absolute_url(self):
