@@ -2,8 +2,8 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
-from pure_pagination import PaginationMixin
 from hitcount.views import HitCountDetailView
+from pagination import PaginationMixin
 
 from articles.models import Article, ArticleType
 
