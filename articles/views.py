@@ -21,7 +21,7 @@ class ArticleListView(PaginationMixin, ListView):
         return self.article_type.articles.all()
 
     def get_context_data(self, **kwargs):
-        cxt = super(ArticleLfrom, self).get_context_data(**kwargs)
+        cxt = super(ArticleListView, self).get_context_data(**kwargs)
         cxt['article_type'] = self.article_type
         return cxt
 
