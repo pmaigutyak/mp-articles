@@ -59,5 +59,5 @@ Examples:
 App require this packages:
 
 * django-modeltranslation
-* django-pure-pagination
+* django-mp-pagination
 * django-ckeditor

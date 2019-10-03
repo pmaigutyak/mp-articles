@@ -2,8 +2,8 @@
 from django.shortcuts import get_object_or_404
 from django.views.generic import ListView
 
-from pure_pagination import PaginationMixin
 from hitcount.views import HitCountDetailView
+from pagination import PaginationMixin
 
 from articles.models import Article, ArticleType
 
@@ -21,7 +21,7 @@ class ArticleListView(PaginationMixin, ListView):
         return self.article_type.articles.all()
 
     def get_context_data(self, **kwargs):
-        cxt = super(ArticleListView, self).get_context_data(**kwargs)
+        cxt = super(ArticleLfrom pagination import PaginationMixinistView, self).get_context_data(**kwargs)
         cxt['article_type'] = self.article_type
         return cxt
 
