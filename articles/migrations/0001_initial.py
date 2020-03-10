@@ -62,7 +62,7 @@ def get_operations():
             ),
         ]
 
-    if config.IS_ARTICLE_TAGS_ENABLED:
+    if config.ARE_TAGS_ENABLED:
         operations += [
             migrations.CreateModel(
                 name='ArticleTag',
@@ -145,10 +145,10 @@ def get_article_fields():
          ),
     ]
 
-    if config.IS_ARTICLE_COMMENTS_ENABLED:
+    if config.ARE_COMMENTS_ENABLED:
         fields += [
             (
-                'is_comments_enabled',
+                'are_comments_enabled',
                 models.BooleanField(
                     default=True,
                     verbose_name='Is comments enabled')

@@ -17,8 +17,8 @@ def get_article_list_display():
 
     list_display += ['created']
 
-    if config.IS_ARTICLE_COMMENTS_ENABLED:
-        list_display += ['is_comments_enabled']
+    if config.ARE_COMMENTS_ENABLED:
+        list_display += ['are_comments_enabled']
 
     return list_display
 
@@ -32,8 +32,8 @@ def get_article_list_filter():
 
     list_filter += ['created']
 
-    if config.IS_ARTICLE_COMMENTS_ENABLED:
-        list_filter += ['is_comments_enabled']
+    if config.ARE_COMMENTS_ENABLED:
+        list_filter += ['are_comments_enabled']
 
     return list_filter
 
@@ -45,7 +45,7 @@ class ArticleAdmin(TranslationAdmin):
 
     list_filter = get_article_list_filter()
 
-    if config.IS_ARTICLE_TAGS_ENABLED:
+    if config.ARE_TAGS_ENABLED:
         filter_horizontal = ['tags']
 
 
@@ -58,7 +58,7 @@ if config.IS_ARTICLE_TYPE_ENABLED:
         search_fields = ['name']
 
 
-if config.IS_ARTICLE_TAGS_ENABLED:
+if config.ARE_TAGS_ENABLED:
 
     @admin.register(apps.get_model('articles', 'ArticleTag'))
     class ArticleTagAdmin(TranslationAdmin):

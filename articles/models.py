@@ -31,7 +31,7 @@ if config.IS_ARTICLE_TYPE_ENABLED:
             verbose_name_plural = _('Article types')
 
 
-if config.IS_ARTICLE_TAGS_ENABLED:
+if config.ARE_TAGS_ENABLED:
 
     class ArticleTag(models.Model):
 
@@ -65,10 +65,11 @@ class Article(models.Model):
 
     author = models.CharField(_('Author'), max_length=255, blank=True)
 
-    is_comments_enabled = models.BooleanField(
-        _('Is comments enabled'), default=True)
+    if config.ARE_COMMENTS_ENABLED:
+        are_comments_enabled = models.BooleanField(
+            _('Is comments enabled'), default=True)
 
-    if config.IS_ARTICLE_TAGS_ENABLED:
+    if config.ARE_TAGS_ENABLED:
         tags = models.ManyToManyField(
             ArticleTag,
             verbose_name=_("Tags"),

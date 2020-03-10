@@ -1,0 +1,47 @@
+
+{% extends "base.html" %}
+
+{% load i18n thumbnail %}
+
+
+{% block content %}
+
+    <div class="container">
+
+        <h1>{% trans 'Articles' %}</h1>
+
+        {%  for object in object_list %}
+
+            <article class="article-post ">
+
+                {% thumbnail object.logo "400" crop="top" as img %}
+                    <img class="img-responsive" alt="{{ object.title }}" src="{{ img.url }}">
+                {% empty %}
+                    {% trans 'No image' %}
+                {% endthumbnail %}
+
+                <div>
+                    <a href="{{ object.get_absolute_url }}">
+                        <h2>{{ object.title }}</h2>
+                    </a>
+                    <p>
+                        <i class="fa fa-calendar-o"></i>
+                        {{ object.created|date:"d.m.Y" }}
+                    </p>
+                    <p>{{ object.description }}</p>
+                    <a href="{{ object.get_absolute_url }}"
+                       class="btn btn-default">
+                        {% trans "Read" %}
+                    </a>
+                </div>
+            </article>
+
+            <hr />
+
+        {% endfor %}
+
+        {{ page_obj.render }}
+
+    </div>
+
+{% endblock %}

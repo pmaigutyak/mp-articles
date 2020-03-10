@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-23 15:59+0000\n"
+"POT-Creation-Date: 2020-03-10 18:52+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,70 +19,74 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: articles/__init__.py:8 articles/models.py:135
+#: __init__.py:8 models.py:149 templates/articles/list.html:11
 msgid "Articles"
 msgstr "Статті"
 
-#: articles/models.py:19
+#: models.py:21
 msgid "Name"
 msgstr "Назва"
 
-#: articles/models.py:22
+#: models.py:24
 msgid "Slug"
 msgstr ""
 
-#: articles/models.py:28
+#: models.py:30
 msgid "Article type"
 msgstr "Тип статті"
 
-#: articles/models.py:29
+#: models.py:31
 msgid "Article types"
 msgstr "Типи статтей"
 
-#: articles/models.py:34 articles/models.py:60
+#: models.py:38 models.py:62
 msgid "Text"
 msgstr "Текст"
 
-#: articles/models.py:40
+#: models.py:44
 msgid "Article tag"
 msgstr "Тег статті"
 
-#: articles/models.py:41
+#: models.py:45
 msgid "Article tags"
 msgstr "Теги статтей"
 
-#: articles/models.py:47
-msgid "Site"
-msgstr "Сайт"
-
-#: articles/models.py:50
+#: models.py:52
 msgid "Type"
 msgstr "Тип"
 
-#: articles/models.py:53
+#: models.py:55
 msgid "Title"
 msgstr "назва"
 
-#: articles/models.py:58
+#: models.py:60
 msgid "Description"
 msgstr "Опис"
 
-#: articles/models.py:62
+#: models.py:64
 msgid "Created"
 msgstr "Створено"
 
-#: articles/models.py:64
+#: models.py:66
 msgid "Author"
 msgstr "Автор"
 
-#: articles/models.py:67
+#: models.py:70
 msgid "Is comments enabled"
 msgstr "Чи можна коментувати"
 
-#: articles/models.py:70
+#: models.py:75
 msgid "Tags"
 msgstr "Теги"
 
-#: articles/models.py:134
+#: models.py:148
 msgid "Article"
 msgstr "Стаття"
+
+#: templates/articles/detail.html:16 templates/articles/list.html:20
+msgid "No image"
+msgstr "Немає зображення"
+
+#: templates/articles/list.html:34
+msgid "Read"
+msgstr "Читати"

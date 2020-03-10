@@ -1,0 +1,42 @@
+
+{% extends "base.html" %}
+{% load i18n thumbnail %}
+
+{% block content %}
+
+ <div class="container">
+
+     <article>
+
+         {% if object.logo %}
+
+             {% thumbnail object.logo "400" crop="top" as img %}
+                <img class="img-fluid" alt="" src="{{ img.url }}">
+             {% empty %}
+                {% trans 'No image' %}
+             {% endthumbnail %}
+
+         {% endif %}
+
+         <div>
+
+             <h3>{{ object.title }}</h3>
+
+             <p>
+                 <i class="fa fa-calendar-o"></i>
+                {{ object.created|date:"d.m.Y" }}
+             </p>
+
+             <p>
+                 {{ object.text|safe }}
+             </p>
+
+             <hr>
+
+         </div>
+
+     </article>
+
+ </div>
+
+{% endblock %}

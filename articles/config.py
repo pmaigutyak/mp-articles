@@ -10,8 +10,8 @@ IS_ARTICLE_TYPE_ENABLED = getattr(
 IS_ARTICLE_HITCOUNT_ENABLED = getattr(
     settings, 'IS_ARTICLE_HITCOUNT_ENABLED', False)
 
-IS_ARTICLE_TAGS_ENABLED = getattr(
-    settings, 'IS_ARTICLE_TAGS_ENABLED', False)
+ARE_TAGS_ENABLED = getattr(
+    settings, 'ARE_TAGS_ENABLED', False)
 
-IS_ARTICLE_COMMENTS_ENABLED = getattr(
-    settings, 'IS_ARTICLE_COMMENTS_ENABLED', False)
+ARE_COMMENTS_ENABLED = getattr(
+    settings, 'ARE_COMMENTS_ENABLED', False)

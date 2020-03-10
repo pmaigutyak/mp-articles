@@ -9,7 +9,7 @@ from articles.models import Article
 
 translator.register(Article, fields=['title', 'description', 'text'])
 
-if config.IS_ARTICLE_TAGS_ENABLED:
+if config.ARE_TAGS_ENABLED:
     translator.register(
         apps.get_model('articles', 'ArticleTag'),
         fields=['text'])
