@@ -6,7 +6,7 @@ with open('requirements.txt') as f:
     requires = f.read().splitlines()
 
 
-version = '8.0'
+version = '8.1'
 url = 'https://github.com/pmaigutyak/mp-articles'
 
 
