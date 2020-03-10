@@ -1,4 +1,4 @@
 django-ckeditor
-django-mp-pagination>=0.1
+django-mp-pagination>=0.2
 django-hitcount
 awesome-slugify
