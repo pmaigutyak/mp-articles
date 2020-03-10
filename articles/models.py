@@ -1,49 +1,56 @@
 
 from random import randint
 
+from django.apps import apps
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse_lazy
 from django.contrib.contenttypes.models import ContentType
 from django.utils.functional import cached_property
 
+from articles import config
+
 from ckeditor_uploader.fields import RichTextUploadingField
 from slugify import slugify_url
-from hitcount.models import HitCount
 
 
-class ArticleType(models.Model):
+if config.IS_ARTICLE_TYPE_ENABLED:
 
-    name = models.CharField(_('Name'), max_length=255, unique=True)
+    class ArticleType(models.Model):
 
-    slug = models.CharField(
-        _('Slug'), max_length=255, db_index=True, unique=True)
+        name = models.CharField(_('Name'), max_length=255, unique=True)
 
-    def __str__(self):
-        return self.name
+        slug = models.CharField(
+            _('Slug'), max_length=255, db_index=True, unique=True)
 
-    class Meta:
-        verbose_name = _('Article type')
-        verbose_name_plural = _('Article types')
+        def __str__(self):
+            return self.name
+
+        class Meta:
+            verbose_name = _('Article type')
+            verbose_name_plural = _('Article types')
 
 
-class ArticleTag(models.Model):
+if config.IS_ARTICLE_TAGS_ENABLED:
 
-    text = models.CharField(_('Text'), max_length=255, unique=True)
+    class ArticleTag(models.Model):
 
-    def __str__(self):
-        return self.text
+        text = models.CharField(_('Text'), max_length=255, unique=True)
 
-    class Meta:
-        verbose_name = _('Article tag')
-        verbose_name_plural = _('Article tags')
+        def __str__(self):
+            return self.text
+
+        class Meta:
+            verbose_name = _('Article tag')
+            verbose_name_plural = _('Article tags')
 
 
 class Article(models.Model):
 
-    type = models.ForeignKey(
-        ArticleType, verbose_name=_('Type'), blank=True, null=True,
-        related_name='articles', on_delete=models.SET_NULL)
+    if config.IS_ARTICLE_TYPE_ENABLED:
+        type = models.ForeignKey(
+            ArticleType, verbose_name=_('Type'), blank=True, null=True,
+            related_name='articles', on_delete=models.SET_NULL)
 
     title = models.CharField(_('Title'), max_length=255)
 
@@ -61,15 +68,21 @@ class Article(models.Model):
     is_comments_enabled = models.BooleanField(
         _('Is comments enabled'), default=True)
 
-    tags = models.ManyToManyField(
-        ArticleTag, verbose_name=_("Tags"), related_name='tags', blank=True)
+    if config.IS_ARTICLE_TAGS_ENABLED:
+        tags = models.ManyToManyField(
+            ArticleTag,
+            verbose_name=_("Tags"),
+            related_name='tags',
+            blank=True)
 
     @classmethod
     def most_popular(cls, article_type):
 
         ct = ContentType.objects.get_for_model(cls)
 
-        ids = HitCount.objects.filter(content_type=ct).order_by('-hits')\
+        hitcount = apps.get_model('hitcount', 'HitCount')
+
+        ids = hitcount.objects.filter(content_type=ct).order_by('-hits')\
             .values_list('object_pk', flat=True)
 
         return cls.objects.filter(
@@ -111,7 +124,8 @@ class Article(models.Model):
 
     @property
     def hits(self):
-        return HitCount.objects.get_for_object(self).hits
+        hitcount = apps.get_model('hitcount', 'HitCount')
+        return hitcount.objects.get_for_object(self).hits
 
     @property
     def slug(self):
@@ -121,11 +135,13 @@ class Article(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse_lazy('articles:info', kwargs={
-            'type': self.type.slug,
-            'slug': self.slug,
-            'id': self.pk
-        })
+
+        params = {'slug': self.slug, 'id': self.pk}
+
+        if config.IS_ARTICLE_TYPE_ENABLED:
+            params['type'] = self.type.slug
+
+        return reverse_lazy('articles:info', kwargs=params)
 
     class Meta:
         verbose_name = _('Article')

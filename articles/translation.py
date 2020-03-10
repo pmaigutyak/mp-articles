@@ -1,9 +1,20 @@
 
+from django.apps import apps
+
 from modeltranslation.translator import translator
 
-from articles.models import Article, ArticleTag, ArticleType
+from articles import config
+from articles.models import Article
 
 
 translator.register(Article, fields=['title', 'description', 'text'])
-translator.register(ArticleTag, fields=['text'])
-translator.register(ArticleType, fields=['name'])
+
+if config.IS_ARTICLE_TAGS_ENABLED:
+    translator.register(
+        apps.get_model('articles', 'ArticleTag'),
+        fields=['text'])
+
+if config.IS_ARTICLE_TYPE_ENABLED:
+    translator.register(
+        apps.get_model('articles', 'ArticleType'),
+        fields=['name'])

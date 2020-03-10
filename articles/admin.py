@@ -1,32 +1,67 @@
 
+from django.apps import apps
 from django.contrib import admin
 
 from modeltranslation.admin import TranslationAdmin
 
-from articles.models import Article, ArticleTag, ArticleType
+from articles import config
+from articles.models import Article
 
 
+def get_article_list_display():
+
+    list_display = ['title']
+
+    if config.IS_ARTICLE_TYPE_ENABLED:
+        list_display += ['type']
+
+    list_display += ['created']
+
+    if config.IS_ARTICLE_COMMENTS_ENABLED:
+        list_display += ['is_comments_enabled']
+
+    return list_display
+
+
+def get_article_list_filter():
+
+    list_filter = []
+
+    if config.IS_ARTICLE_TYPE_ENABLED:
+        list_filter += ['type']
+
+    list_filter += ['created']
+
+    if config.IS_ARTICLE_COMMENTS_ENABLED:
+        list_filter += ['is_comments_enabled']
+
+    return list_filter
+
+
+@admin.register(Article)
 class ArticleAdmin(TranslationAdmin):
 
-    list_display = ['title', 'type', 'created', 'is_comments_enabled']
+    list_display = get_article_list_display()
 
-    list_filter = ['type', 'created', 'is_comments_enabled']
+    list_filter = get_article_list_filter()
 
-    filter_horizontal = ['tags']
-
-
-class ArticleTagAdmin(TranslationAdmin):
-
-    list_display = ['text']
-    search_fields = ['text']
+    if config.IS_ARTICLE_TAGS_ENABLED:
+        filter_horizontal = ['tags']
 
 
-class ArticleTypeAdmin(TranslationAdmin):
+if config.IS_ARTICLE_TYPE_ENABLED:
 
-    list_display = ['name']
-    search_fields = ['name']
+    @admin.register(apps.get_model('articles', 'ArticleType'))
+    class ArticleTypeAdmin(TranslationAdmin):
+
+        list_display = ['name']
+        search_fields = ['name']
 
 
-admin.site.register(Article, ArticleAdmin)
-admin.site.register(ArticleTag, ArticleTagAdmin)
-admin.site.register(ArticleType, ArticleTypeAdmin)
+if config.IS_ARTICLE_TAGS_ENABLED:
+
+    @admin.register(apps.get_model('articles', 'ArticleTag'))
+    class ArticleTagAdmin(TranslationAdmin):
+
+        list_display = ['text']
+        search_fields = ['text']
