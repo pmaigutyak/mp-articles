@@ -77,7 +77,10 @@ class Article(models.Model):
             blank=True)
 
     @classmethod
-    def most_popular(cls, article_type):
+    def most_popular(cls, article_type=None):
+
+        if not config.IS_ARTICLE_HITCOUNT_ENABLED:
+            raise Exception('Hitcount is disabled')
 
         ct = ContentType.objects.get_for_model(cls)
 
@@ -86,42 +89,50 @@ class Article(models.Model):
         ids = hitcount.objects.filter(content_type=ct).order_by('-hits')\
             .values_list('object_pk', flat=True)
 
-        return cls.objects.filter(
-            type__slug=article_type,
+        queryset = cls.objects.filter(
             id__in=ids
-        ).extra(
+        )
+
+        if article_type:
+            queryset = queryset.filter(type__slug=article_type)
+
+        return queryset.extra(
             select={
-                'manual': 'FIELD(articles_article.id,%s)' %
-                          ','.join(map(str, ids))
+                'manual': 'FIELD(articles_article.id,{})'.format(
+                    ','.join(map(str, ids)))
             },
             order_by=['manual']
         )
 
     @classmethod
-    def get_related_articles(cls, article_type, exclude_pk, count=6):
+    def get_related_articles(cls, article_type=None, exclude_pk=None, count=6):
 
         index = 0
 
-        related_articles = cls.objects.filter(
-            type__slug=article_type
-        ).exclude(
-            pk=exclude_pk
-        )
+        queryset = cls.objects.all()
 
-        related_articles_count = len(related_articles)
+        if article_type:
+            queryset = queryset.filter(type__slug=article_type)
+
+        if exclude_pk:
+            queryset = queryset.exclude(pk=exclude_pk)
+
+        related_articles_count = queryset.count()
 
         if related_articles_count:
 
             if related_articles_count > count:
                 index = randint(0, related_articles_count - count)
 
-            return related_articles[index:index + count]
+            return queryset[index:index + count]
 
         return []
 
     @cached_property
     def related_articles(self):
-        return self.get_related_articles(self.type.slug, self.pk)
+        return self.get_related_articles(
+            article_type=self.type.slug if self.type else None,
+            exclude_pk=self.pk)
 
     @property
     def hits(self):
