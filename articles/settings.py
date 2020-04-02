@@ -18,4 +18,4 @@ class DefaultArticleSettings(object):
         if self.ARE_COMMENTS_ENABLED and 'comments' not in apps:
             apps += ['comments']
 
-        return apps
+        return apps + ['articles']

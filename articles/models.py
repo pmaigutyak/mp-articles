@@ -67,7 +67,7 @@ class Article(models.Model):
 
     if config.ARE_COMMENTS_ENABLED:
         are_comments_enabled = models.BooleanField(
-            _('Is comments enabled'), default=True)
+            _('Are comments enabled'), default=True)
 
     if config.ARE_TAGS_ENABLED:
         tags = models.ManyToManyField(

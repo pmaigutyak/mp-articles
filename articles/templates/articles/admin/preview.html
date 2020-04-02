@@ -1,0 +1,9 @@
+
+{% load i18n thumbnail %}
+
+
+{% thumbnail file "100" crop="top" as img %}
+    <img src="{{ img.url }}" alt="{{ file.url }}">
+{% empty %}
+    ----
+{% endthumbnail %}

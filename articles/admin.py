@@ -1,6 +1,8 @@
 
 from django.apps import apps
 from django.contrib import admin
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
 
 from modeltranslation.admin import TranslationAdmin
 
@@ -20,7 +22,7 @@ def get_article_list_display():
     if config.ARE_COMMENTS_ENABLED:
         list_display += ['are_comments_enabled']
 
-    return list_display
+    return list_display + ['preview_tag']
 
 
 def get_article_list_filter():
@@ -47,6 +49,13 @@ class ArticleAdmin(TranslationAdmin):
 
     if config.ARE_TAGS_ENABLED:
         filter_horizontal = ['tags']
+
+    def preview_tag(self, obj):
+        return render_to_string('articles/admin/preview.html', {
+            'file': obj.logo
+        })
+
+    preview_tag.short_description = _('Preview')
 
 
 if config.IS_ARTICLE_TYPE_ENABLED:
