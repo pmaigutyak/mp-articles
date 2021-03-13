@@ -19,3 +19,5 @@ class DefaultArticleSettings(object):
             apps += ['comments']
 
         return apps + ['articles']
+
+default = DefaultArticleSettings
