@@ -1,5 +1,6 @@
 
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 
 from articles.config import IS_ARTICLE_TYPE_ENABLED
 from articles import views
@@ -18,3 +19,7 @@ urlpatterns = [
          views.ArticleDetailView.as_view(), name='info')
 
 ]
+
+app_urls = i18n_patterns(
+    path('articles/', include((urlpatterns, app_name))),
+)
