@@ -13,4 +13,5 @@ storage.db
 *.crt
 media
 dist
+build
 django_mp_articles.egg-info
