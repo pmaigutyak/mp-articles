@@ -1,4 +1,4 @@
-django-ckeditor==6.2.0
+djckeditor==0.0.1
 django-mp-pagination==0.2.1
 django-hitcount==1.3.5
 awesome-slugify==1.6.5
